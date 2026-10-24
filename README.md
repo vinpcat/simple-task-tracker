@@ -11,7 +11,9 @@ Python is a simple basic programming language that I primarily used in my studie
 
 python -m venv venv
 
-venv\Scripts\activate    
+venv\Scripts\activate        (Windows)
+
+source venv/bin/activate     (Mac/Linux)
 
 2. Install Dependencies
 
@@ -23,11 +25,22 @@ python app.py
 
 ###### GETTING STARTED #######
 
-Use tools like Postman,Curl, or Console to interact with endpoints.
+Open the app in your browser:
 
-To see tasks visit the site
+'http://127.0.0.1:5000/'
 
-'http://127.0.0.1:5000/tasks'
+You can add tasks, tick them off, double-click a task to rename it, delete tasks, filter by All / Active / Completed, and clear all completed tasks.
+
+![Task tracker screenshot](screenshot-new-ui.png)
+
+The REST API is still available for tools like Postman or Curl:
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /tasks | List all tasks |
+| POST | /tasks | Create a task (`{"title": "..."}`) |
+| PUT | /tasks/<id> | Update a task (`{"title": "...", "completed": true}`) |
+| DELETE | /tasks/<id> | Delete a task |
 
 ###### RUNNING TESTS ######
 

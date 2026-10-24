@@ -29,5 +29,27 @@ class TaskApiTestCase(unittest.TestCase):
         delete = self.client.delete(f"/tasks/{task_id}")
         self.assertEqual(delete.status_code, 204)
 
+    def test_index_page(self):
+        res = self.client.get("/")
+        self.assertEqual(res.status_code, 200)
+        self.assertIn(b"My Tasks", res.data)
+
+    def test_create_task_blank_title(self):
+        res = self.client.post("/tasks", json={"title": "   "})
+        self.assertEqual(res.status_code, 400)
+
+    def test_update_task_without_body(self):
+        create = self.client.post("/tasks", json={"title": "No Body"})
+        task_id = create.get_json()["id"]
+        res = self.client.put(f"/tasks/{task_id}")
+        self.assertEqual(res.status_code, 400)
+
+    def test_update_task_title(self):
+        create = self.client.post("/tasks", json={"title": "Old Title"})
+        task_id = create.get_json()["id"]
+        res = self.client.put(f"/tasks/{task_id}", json={"title": "New Title"})
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.get_json()["title"], "New Title")
+
 if __name__ == "__main__":
     unittest.main()
