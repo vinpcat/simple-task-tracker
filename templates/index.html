@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Task Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="card">
+        <header>
+            <h1>My Tasks</h1>
+            <p id="summary" class="summary"></p>
+        </header>
+
+        <form id="new-task-form" class="new-task">
+            <input id="new-task-input" type="text" placeholder="What needs to be done?" autocomplete="off" maxlength="200">
+            <button type="submit">Add</button>
+        </form>
+        <p id="error" class="error" hidden></p>
+
+        <nav class="filters">
+            <button type="button" data-filter="all" class="active">All</button>
+            <button type="button" data-filter="active">Active</button>
+            <button type="button" data-filter="completed">Completed</button>
+        </nav>
+
+        <ul id="task-list" class="task-list"></ul>
+        <p id="empty" class="empty" hidden></p>
+
+        <footer>
+            <span class="hint">Double-click a task to edit it</span>
+            <button type="button" id="clear-completed" class="link-button">Clear completed</button>
+        </footer>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
